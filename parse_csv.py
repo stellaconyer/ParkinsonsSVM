@@ -51,31 +51,73 @@ def open_files():
 test_file="extracted/HumDynLog_CHERRY_LGE_LGE_A000002872F302_20120122_080000_20120122_090000/hdl_accel_CHERRY_20120122_080000.csv"
 
 def calculate_RMS(a_file):
-    startTime = datetime.now()
-    x_abs = 0
-    x_1hz = 0
-    x_3hz = 0
-    x_6hz = 0
-    x_10hz = 0
-    length = 0
+    for a_file in file_list:
+        with open(a_file,'r') as csv_file:
+            x_abs = 0
+            x_1hz = 0
+            x_3hz = 0
+            x_6hz = 0
+            x_10hz = 0
 
-    with open(a_file,'r') as csv_file:
-        csv_file.next()
-        for line in csv_file:
-            length +=1
-            line = line.split(",")
-            x_abs += float(line[2])
-            x_1hz += float(line[6])
-            x_3hz += float(line[7])
-            x_6hz += float(line[8])
-            x_10hz += float(line[9])
-    x_abs_avg = (x_abs/length)
-    x_1hz_avg = (x_1hz/length)
-    x_3hz_avg = (x_3hz/length)
-    x_6hz_avg = (x_6hz/length)
-    x_10hz_avg = (x_10hz/length)
-    print x_abs_avg, x_1hz_avg, x_3hz_avg, x_6hz_avg, x_10hz_avg
-    print(datetime.now()-startTime)
+            y_abs = 0
+            y_1hz = 0
+            y_3hz = 0
+            y_6hz = 0
+            y_10hz = 0
+
+            z_abs = 0
+            z_1hz = 0
+            z_3hz = 0
+            z_6hz = 0
+            z_10hz = 0
+
+            length = 0
+
+            print a_file
+            csv_file.next() #skip the header
+            for line in csv_file:
+                length +=1
+                line = line.split(",")
+                x_abs += float(line[3])
+                x_1hz += float(line[6])
+                x_3hz += float(line[7])
+                x_6hz += float(line[8])
+                x_10hz += float(line[9])
+
+                y_abs += float(line[11])
+                y_1hz += float(line[14])
+                y_3hz += float(line[15])
+                y_6hz += float(line[16])
+                y_10hz += float(line[17])
+
+                z_abs += float(line[19])
+                z_1hz += float(line[22])
+                z_3hz += float(line[23])
+                z_6hz += float(line[24])
+                z_10hz += float(line[25])
+
+
+        x_abs_avg = (x_abs/length)
+        x_1hz_avg = (x_1hz/length)
+        x_3hz_avg = (x_3hz/length)
+        x_6hz_avg = (x_6hz/length)
+        x_10hz_avg = (x_10hz/length)
+
+        y_abs_avg = (y_abs/length)
+        y_1hz_avg = (y_1hz/length)
+        y_3hz_avg = (y_3hz/length)
+        y_6hz_avg = (y_6hz/length)
+        y_10hz_avg = (y_10hz/length)
+
+        z_abs_avg = (z_abs/length)
+        z_1hz_avg = (z_1hz/length)
+        z_3hz_avg = (z_3hz/length)
+        z_6hz_avg = (z_6hz/length)
+        z_10hz_avg = (z_10hz/length)
+
+        print "xavg: ",x_abs_avg, x_1hz_avg, x_3hz_avg, x_6hz_avg, x_10hz_avg
+        print "yavg: ",y_abs_avg, y_1hz_avg, y_3hz_avg, y_6hz_avg, y_10hz_avg
+        print "zavg: ",z_abs_avg, z_1hz_avg, z_3hz_avg, z_6hz_avg, z_10hz_avg
 
     # rms_abs, rms_1, rms_3, rms_6, rms_10
 
