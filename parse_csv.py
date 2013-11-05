@@ -141,7 +141,8 @@ def calculate_RMS(file_list):
         rms_10hz = sqrt(mean(total_10hz_avg**2))
         print "rms 10hz",rms_10hz
 
-    #append data to master_hourly.CSV    
+    #append data to master_hourly.CSV
+    #BE SURE TO CLEAR THE OLD HOURLY CSV FROM RUNNING TESTS!    
         with open("master_hourly.csv", 'ab') as csvfile:
             linewriter = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
             linewriter.writerow([rms_abs, rms_1hz, rms_3hz, rms_6hz, rms_10hz]) 
