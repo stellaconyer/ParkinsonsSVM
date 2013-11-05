@@ -9,50 +9,30 @@ import csv
 #Choose to write to file or print to standard output
 # -----------
 
-#Extracting tarballs
-#############################################################
-
-#extract an accel file from the tarball
-def extract_accel_tar(a_tar):
-    match = ["accel", ".csv"]
-    with tarfile.open(a_tar) as tar:
-        subdir_and_files = [
-            tarinfo for tarinfo in tar.getmembers()
-            if all(x in tarinfo.name for x in match)
-            ]
-        tar.extractall(path="extracted", members=subdir_and_files)
-
-#Navigate to filepaths, run extract_accel_tar function
-#Path is currently set to csv_files
-def extract_from_path():
-    path = r'csv_files'
-
-    for dir_entry in os.listdir(path):
-        my_tar = os.path.join(path, dir_entry)
-        extract_accel_tar(my_tar)
-
-
-#############################################################
-
+#Not us
 
 #open all accel files to parse out lines
-#TO DO: make this more efficient! 
-def open_files():
-    rootdir = "extracted"
-    file_list = []
-    for root, subFolders, files in os.walk(rootdir):
-        for a_file in files:
-            file_name = os.path.join(root, a_file)
-            file_list.append(file_name)
-    return file_list
-                # for lines in file_to_read:
-                #     parse_lines(lines)
+# def open_files():
+#     rootdir = "extracted"
+#     file_list = []
+#     for root, subFolders, files in os.walk(rootdir):
+#         for a_file in files:
+#             file_name = os.path.join(root, a_file)
+#             file_list.append(file_name)
+#     return file_list
 
-#initial RMS calculation- not sure if this should be using the CSV module 
+
+##############################################################
+
+# Use """ find extracted -name "*.csv"| python parse_csv.py name_to_save_under """ to run from command line
+
+#initial RMS calculation
 # Average absolute.deviation, and PSD at 1, 3, 6, and 10hz for each axis over one hour (or length of file if shorter than one hour) (eg x_abs, x_1hz, x_3hz, x_6hz, x_10hz)
 #take root mean square of the x,y,z values to come up with rms_abs, rms_1, rms_3, rms_6, rms_10
-def calculate_RMS(file_list):
-    for a_file in file_list:
+def calculate_RMS():
+    print sys.argv
+    for line in sys.stdin:
+        a_file = line.strip()
         with open(a_file,'r') as csv_file:
             x_abs = 0
             x_1hz = 0
@@ -141,13 +121,13 @@ def calculate_RMS(file_list):
         rms_10hz = sqrt(mean(total_10hz_avg**2))
         print "rms 10hz",rms_10hz
 
-    #append data to master_hourly.CSV
-    #BE SURE TO CLEAR THE OLD HOURLY CSV FROM RUNNING TESTS!    
-        with open("master_hourly.csv", 'ab') as csvfile:
+    # append data to master_hourly.CSV
+    # BE SURE TO CLEAR THE OLD HOURLY CSV FROM RUNNING TESTS!
+        filename = "../" +sys.argv[1]+ "_master_hourly.csv"    
+        with open(filename, 'ab') as csvfile:
             linewriter = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
             linewriter.writerow([rms_abs, rms_1hz, rms_3hz, rms_6hz, rms_10hz]) 
 
-file_list = open_files()
-calculate_RMS(file_list)
+calculate_RMS()
 
 
