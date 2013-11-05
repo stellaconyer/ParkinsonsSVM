@@ -2,6 +2,7 @@ import os
 import sys
 import tarfile
 from datetime import datetime
+from numpy import mean, sqrt, arange, array
 
 #Take in a CSV from CLI
 #Choose to write to file or print to standard output
@@ -50,7 +51,7 @@ def open_files():
 #Not sure if this should be using the CSV module 
 test_file="extracted/HumDynLog_CHERRY_LGE_LGE_A000002872F302_20120122_080000_20120122_090000/hdl_accel_CHERRY_20120122_080000.csv"
 
-def calculate_RMS(a_file):
+def calculate_RMS(file_list):
     for a_file in file_list:
         with open(a_file,'r') as csv_file:
             x_abs = 0
@@ -115,23 +116,44 @@ def calculate_RMS(a_file):
         z_6hz_avg = (z_6hz/length)
         z_10hz_avg = (z_10hz/length)
 
-        print "xavg: ",x_abs_avg, x_1hz_avg, x_3hz_avg, x_6hz_avg, x_10hz_avg
-        print "yavg: ",y_abs_avg, y_1hz_avg, y_3hz_avg, y_6hz_avg, y_10hz_avg
-        print "zavg: ",z_abs_avg, z_1hz_avg, z_3hz_avg, z_6hz_avg, z_10hz_avg
+        # print "xavg: ",x_abs_avg, x_1hz_avg, x_3hz_avg, x_6hz_avg, x_10hz_avg
+        # print "yavg: ",y_abs_avg, y_1hz_avg, y_3hz_avg, y_6hz_avg, y_10hz_avg
+        # print "zavg: ",z_abs_avg, z_1hz_avg, z_3hz_avg, z_6hz_avg, z_10hz_avg
 
     # rms_abs, rms_1, rms_3, rms_6, rms_10
+        total_abs_avg = array([x_abs_avg, y_abs_avg, z_abs_avg])
+        rms_abs = sqrt(mean(total_abs_avg**2))
+        print "rms abs",rms_abs
+
+        total_1hz_avg = array([x_1hz_avg, y_1hz_avg, z_1hz_avg])
+        rms_1hz = sqrt(mean(total_1hz_avg**2))
+        print "rms 1hz",rms_1hz
+
+        total_3hz_avg = array([x_3hz_avg, y_3hz_avg, z_3hz_avg])
+        rms_3hz = sqrt(mean(total_3hz_avg**2))
+        print "rms 3hz",rms_3hz
+
+        total_6hz_avg = array([x_6hz_avg, y_6hz_avg, z_6hz_avg])
+        rms_6hz = sqrt(mean(total_6hz_avg**2))
+        print "rms 6hz",rms_6hz
+
+        total_10hz_avg = array([x_10hz_avg, y_10hz_avg, z_10hz_avg])
+        rms_10hz = sqrt(mean(total_10hz_avg**2))
+        print "rms 10hz",rms_10hz
 
 
-def parse_lines(file_list):
-    for a_file in file_list:
-        calculate_RMS(a_file)
+        # total_1hz_avg = (total_1hz/length)
+        # total_3hz_avg = (total_3hz/length)
+        # total_6hz_avg = (total_6hz/length)
+        # total_10hz_avg = (total_10hz/length)
+
 
         
     # with open("master_hourly.csv", 'ab') as master_file:
     #     master_file.write(rms_abs, rms_1, rms_3, rms_6, rms_10)
 
 file_list = open_files()
-parse_lines(file_list)
+calculate_RMS(file_list)
 
 # calculate_RMS(test_file)
 
