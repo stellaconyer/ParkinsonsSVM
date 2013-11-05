@@ -3,6 +3,7 @@ import sys
 import tarfile
 from datetime import datetime
 from numpy import mean, sqrt, arange, array
+import csv
 
 #Take in a CSV from CLI
 #Choose to write to file or print to standard output
@@ -47,10 +48,9 @@ def open_files():
                 # for lines in file_to_read:
                 #     parse_lines(lines)
 
-#initial RMS calculation
-#Not sure if this should be using the CSV module 
-test_file="extracted/HumDynLog_CHERRY_LGE_LGE_A000002872F302_20120122_080000_20120122_090000/hdl_accel_CHERRY_20120122_080000.csv"
-
+#initial RMS calculation- not sure if this should be using the CSV module 
+# Average absolute.deviation, and PSD at 1, 3, 6, and 10hz for each axis over one hour (or length of file if shorter than one hour) (eg x_abs, x_1hz, x_3hz, x_6hz, x_10hz)
+#take root mean square of the x,y,z values to come up with rms_abs, rms_1, rms_3, rms_6, rms_10
 def calculate_RMS(file_list):
     for a_file in file_list:
         with open(a_file,'r') as csv_file:
@@ -120,7 +120,7 @@ def calculate_RMS(file_list):
         # print "yavg: ",y_abs_avg, y_1hz_avg, y_3hz_avg, y_6hz_avg, y_10hz_avg
         # print "zavg: ",z_abs_avg, z_1hz_avg, z_3hz_avg, z_6hz_avg, z_10hz_avg
 
-    # rms_abs, rms_1, rms_3, rms_6, rms_10
+    # Calculate RMS for 5 dimensions
         total_abs_avg = array([x_abs_avg, y_abs_avg, z_abs_avg])
         rms_abs = sqrt(mean(total_abs_avg**2))
         print "rms abs",rms_abs
@@ -141,27 +141,12 @@ def calculate_RMS(file_list):
         rms_10hz = sqrt(mean(total_10hz_avg**2))
         print "rms 10hz",rms_10hz
 
-
-        # total_1hz_avg = (total_1hz/length)
-        # total_3hz_avg = (total_3hz/length)
-        # total_6hz_avg = (total_6hz/length)
-        # total_10hz_avg = (total_10hz/length)
-
-
-        
-    # with open("master_hourly.csv", 'ab') as master_file:
-    #     master_file.write(rms_abs, rms_1, rms_3, rms_6, rms_10)
+    #append data to master_hourly.CSV    
+        with open("master_hourly.csv", 'ab') as csvfile:
+            linewriter = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+            linewriter.writerow([rms_abs, rms_1hz, rms_3hz, rms_6hz, rms_10hz]) 
 
 file_list = open_files()
 calculate_RMS(file_list)
 
-# calculate_RMS(test_file)
 
-# Average absolute.deviation, and PSD at 1, 3, 6, and 10hz for each axis over one hour (or length of file if shorter than one hour) (eg x_abs, x_1hz, x_3hz, x_6hz, x_10hz)
-#take root mean square of the x,y,z values to come up with rms_abs, rms_1, rms_3, rms_6, rms_10
-#append data to master_hourly.CSV
-
-
-
-# master_file = open(master_hourly.CSV,'ab')
-# master_file.write()
