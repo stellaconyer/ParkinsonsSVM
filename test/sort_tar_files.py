@@ -24,3 +24,6 @@ def main():
 
 # find extracted  -name "HumDynLog_CHERRY_LGE_LGE_A000002872F302_20120122_080000_*" | python sort_tar_files.py
 # find extracted  -name "*.csv" |head -5| python parse_csv.py
+
+
+# find flox_extracted -name "*.csv"| python ~/hackbright/ParkinsonsSVM/parse_csv.py flox

@@ -123,7 +123,7 @@ def calculate_RMS():
 
     # append data to master_hourly.CSV
     # BE SURE TO CLEAR THE OLD HOURLY CSV FROM RUNNING TESTS!
-        filename = "../" +sys.argv[1]+ "_master_hourly.csv"    
+        filename = sys.argv[1]+ "_master_hourly.csv"    
         with open(filename, 'ab') as csvfile:
             linewriter = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
             linewriter.writerow([rms_abs, rms_1hz, rms_3hz, rms_6hz, rms_10hz]) 

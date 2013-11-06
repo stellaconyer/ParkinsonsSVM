@@ -19,7 +19,9 @@ def extract_accel_tar(a_tar):
 def extract_from_path():
     path = sys.argv[1]
     # path = r'csv_files'
-
     for dir_entry in os.listdir(path):
+        print dir_entry
         my_tar = os.path.join(path, dir_entry)
         extract_accel_tar(my_tar)
+
+extract_from_path()
