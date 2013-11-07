@@ -9,7 +9,7 @@ import csv
 #Choose to write to file or print to standard output
 # -----------
 
-#Not us
+#Not using any more
 
 #open all accel files to parse out lines
 # def open_files():
@@ -30,8 +30,7 @@ import csv
 # Average absolute.deviation, and PSD at 1, 3, 6, and 10hz for each axis over one hour (or length of file if shorter than one hour) (eg x_abs, x_1hz, x_3hz, x_6hz, x_10hz)
 #take root mean square of the x,y,z values to come up with rms_abs, rms_1, rms_3, rms_6, rms_10
 def calculate_RMS():
-    print sys.argv
-    for line in sys.stdin:
+    for line in sys.stdin: 
         a_file = line.strip()
         with open(a_file,'r') as csv_file:
             x_abs = 0
@@ -122,8 +121,8 @@ def calculate_RMS():
         print "rms 10hz",rms_10hz
 
     # append data to master_hourly.CSV
-    # BE SURE TO CLEAR THE OLD HOURLY CSV FROM RUNNING TESTS!
-        filename = sys.argv[1]+ "_master_hourly.csv"    
+    ### CHANGE SO IT TAKES THE FILENAME AND LABEL ID OF CONTROL OR PARKINSONS
+        filename = "variable_master_hourly.csv"    
         with open(filename, 'ab') as csvfile:
             linewriter = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
             linewriter.writerow([rms_abs, rms_1hz, rms_3hz, rms_6hz, rms_10hz]) 
