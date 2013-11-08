@@ -76,56 +76,58 @@ def calculate_RMS():
                 z_6hz += float(line[24])
                 z_10hz += float(line[25])
 
+        if length > 600:
+            x_abs_avg = (x_abs/length)
+            x_1hz_avg = (x_1hz/length)
+            x_3hz_avg = (x_3hz/length)
+            x_6hz_avg = (x_6hz/length)
+            x_10hz_avg = (x_10hz/length)
 
-        x_abs_avg = (x_abs/length)
-        x_1hz_avg = (x_1hz/length)
-        x_3hz_avg = (x_3hz/length)
-        x_6hz_avg = (x_6hz/length)
-        x_10hz_avg = (x_10hz/length)
+            y_abs_avg = (y_abs/length)
+            y_1hz_avg = (y_1hz/length)
+            y_3hz_avg = (y_3hz/length)
+            y_6hz_avg = (y_6hz/length)
+            y_10hz_avg = (y_10hz/length)
 
-        y_abs_avg = (y_abs/length)
-        y_1hz_avg = (y_1hz/length)
-        y_3hz_avg = (y_3hz/length)
-        y_6hz_avg = (y_6hz/length)
-        y_10hz_avg = (y_10hz/length)
+            z_abs_avg = (z_abs/length)
+            z_1hz_avg = (z_1hz/length)
+            z_3hz_avg = (z_3hz/length)
+            z_6hz_avg = (z_6hz/length)
+            z_10hz_avg = (z_10hz/length)
 
-        z_abs_avg = (z_abs/length)
-        z_1hz_avg = (z_1hz/length)
-        z_3hz_avg = (z_3hz/length)
-        z_6hz_avg = (z_6hz/length)
-        z_10hz_avg = (z_10hz/length)
+            # print "xavg: ",x_abs_avg, x_1hz_avg, x_3hz_avg, x_6hz_avg, x_10hz_avg
+            # print "yavg: ",y_abs_avg, y_1hz_avg, y_3hz_avg, y_6hz_avg, y_10hz_avg
+            # print "zavg: ",z_abs_avg, z_1hz_avg, z_3hz_avg, z_6hz_avg, z_10hz_avg
 
-        # print "xavg: ",x_abs_avg, x_1hz_avg, x_3hz_avg, x_6hz_avg, x_10hz_avg
-        # print "yavg: ",y_abs_avg, y_1hz_avg, y_3hz_avg, y_6hz_avg, y_10hz_avg
-        # print "zavg: ",z_abs_avg, z_1hz_avg, z_3hz_avg, z_6hz_avg, z_10hz_avg
+        # Calculate RMS for 5 dimensions
+            total_abs_avg = array([x_abs_avg, y_abs_avg, z_abs_avg])
+            rms_abs = sqrt(mean(total_abs_avg**2))
+            print "rms abs",rms_abs
 
-    # Calculate RMS for 5 dimensions
-        total_abs_avg = array([x_abs_avg, y_abs_avg, z_abs_avg])
-        rms_abs = sqrt(mean(total_abs_avg**2))
-        print "rms abs",rms_abs
+            total_1hz_avg = array([x_1hz_avg, y_1hz_avg, z_1hz_avg])
+            rms_1hz = sqrt(mean(total_1hz_avg**2))
+            print "rms 1hz",rms_1hz
 
-        total_1hz_avg = array([x_1hz_avg, y_1hz_avg, z_1hz_avg])
-        rms_1hz = sqrt(mean(total_1hz_avg**2))
-        print "rms 1hz",rms_1hz
+            total_3hz_avg = array([x_3hz_avg, y_3hz_avg, z_3hz_avg])
+            rms_3hz = sqrt(mean(total_3hz_avg**2))
+            print "rms 3hz",rms_3hz
 
-        total_3hz_avg = array([x_3hz_avg, y_3hz_avg, z_3hz_avg])
-        rms_3hz = sqrt(mean(total_3hz_avg**2))
-        print "rms 3hz",rms_3hz
+            total_6hz_avg = array([x_6hz_avg, y_6hz_avg, z_6hz_avg])
+            rms_6hz = sqrt(mean(total_6hz_avg**2))
+            print "rms 6hz",rms_6hz
 
-        total_6hz_avg = array([x_6hz_avg, y_6hz_avg, z_6hz_avg])
-        rms_6hz = sqrt(mean(total_6hz_avg**2))
-        print "rms 6hz",rms_6hz
+            total_10hz_avg = array([x_10hz_avg, y_10hz_avg, z_10hz_avg])
+            rms_10hz = sqrt(mean(total_10hz_avg**2))
+            print "rms 10hz",rms_10hz
 
-        total_10hz_avg = array([x_10hz_avg, y_10hz_avg, z_10hz_avg])
-        rms_10hz = sqrt(mean(total_10hz_avg**2))
-        print "rms 10hz",rms_10hz
+            label_id = 0
 
-    # append data to master_hourly.CSV
-    ### CHANGE SO IT TAKES THE FILENAME AND LABEL ID OF CONTROL OR PARKINSONS
-        filename = "variable_master_hourly.csv"    
-        with open(filename, 'ab') as csvfile:
-            linewriter = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-            linewriter.writerow([rms_abs, rms_1hz, rms_3hz, rms_6hz, rms_10hz]) 
+        # append data to master_hourly.CSV
+        ### CHANGE SO IT TAKES THE FILENAME AND LABEL ID OF CONTROL OR PARKINSONS
+            filename = "control_master_hourly.csv"    
+            with open(filename, 'ab') as csvfile:
+                linewriter = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
+                linewriter.writerow([rms_abs, rms_1hz, rms_3hz, rms_6hz, rms_10hz, label_id,a_file]) 
 
 calculate_RMS()
 
