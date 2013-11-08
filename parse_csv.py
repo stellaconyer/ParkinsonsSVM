@@ -120,11 +120,11 @@ def calculate_RMS():
             rms_10hz = sqrt(mean(total_10hz_avg**2))
             print "rms 10hz",rms_10hz
 
-            label_id = 0
+            label_id = 1
 
         # append data to master_hourly.CSV
         ### CHANGE SO IT TAKES THE FILENAME AND LABEL ID OF CONTROL OR PARKINSONS
-            filename = "control_master_hourly.csv"    
+            filename = "test_parkinsons_master_hourly.csv"    
             with open(filename, 'ab') as csvfile:
                 linewriter = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
                 linewriter.writerow([rms_abs, rms_1hz, rms_3hz, rms_6hz, rms_10hz, label_id,a_file]) 

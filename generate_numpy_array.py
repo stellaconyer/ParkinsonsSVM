@@ -11,12 +11,12 @@ import matplotlib.pyplot as plt
 
 def generate_numpy_array():
 	# Control:
-	control_data_array = np.genfromtxt('control_master_hourly.csv', usecols= (0,1,2,3,4), delimiter=',')
-	control_labels_array = np.genfromtxt('control_master_hourly.csv', usecols= (5), delimiter=',')
+	control_data_array = np.genfromtxt('old_datasets/avg_then_rms_dataset/control_master_hourly.csv', usecols= (0,1,2,3,4), delimiter=',')
+	control_labels_array = np.genfromtxt('old_datasets/avg_then_rms_dataset/control_master_hourly.csv', usecols= (5), delimiter=',')
 
 	# Parkinsons:
-	parkinsons_data_array = np.genfromtxt('parkinsons_master_hourly.csv', usecols= (0,1,2,3,4), delimiter=',')
-	parkinsons_labels_array = np.genfromtxt('parkinsons_master_hourly.csv', usecols= (5), delimiter=',')
+	parkinsons_data_array = np.genfromtxt('old_datasets/avg_then_rms_dataset/parkinsons_master_hourly.csv', usecols= (0,1,2,3,4), delimiter=',')
+	parkinsons_labels_array = np.genfromtxt('old_datasets/avg_then_rms_dataset/parkinsons_master_hourly.csv', usecols= (5), delimiter=',')
 
 	# Master of control and parkinsons:
 	master_data_array_unscaled = np.concatenate([control_data_array, parkinsons_data_array])
@@ -47,7 +47,7 @@ def generate_numpy_array():
 
 
 	tuned_parameters = [{'kernel': ['rbf'], 'gamma': [1e-3, 1e-4, 1e-2],
-	                     'C': [11000, 30000]}]
+	                     'C': [100]}]
 
 	scores = ['precision', 'recall']
 

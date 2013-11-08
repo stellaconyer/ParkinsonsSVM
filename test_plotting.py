@@ -8,7 +8,7 @@ from sklearn.metrics import classification_report
 from sklearn.svm import SVC
 import matplotlib.pyplot as plt
 
-SCALE = 0.5
+SCALE = .5
 ABS = 0
 LOW = 1
 MID = 2
@@ -17,8 +17,8 @@ HIGH = 4
 
 def generate_numpy_array():
 	# Control:
-	x_axis = HIGHMID
-	y_axis = HIGH
+	x_axis =  MID
+	y_axis = HIGHMID
 	control_data_array_x = np.genfromtxt('control_master_hourly.csv', usecols= (x_axis), delimiter=',')
 	# control_data_array_x = preprocessing.scale(control_data_array_x)
 	# control_labels_array = np.genfromtxt('control_master_hourly.csv', usecols= (5), delimiter=',')
