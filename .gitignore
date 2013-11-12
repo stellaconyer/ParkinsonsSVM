@@ -2,3 +2,4 @@ env/
 csv_files/]*.pyc
 .*.swp
 *.db
+random_files/

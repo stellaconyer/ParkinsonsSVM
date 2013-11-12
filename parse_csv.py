@@ -5,26 +5,11 @@ from datetime import datetime
 from numpy import mean, sqrt, arange, array
 import csv
 
-#Take in a CSV from CLI
-#Choose to write to file or print to standard output
-# -----------
-
-#Not using any more
-
-#open all accel files to parse out lines
-# def open_files():
-#     rootdir = "extracted"
-#     file_list = []
-#     for root, subFolders, files in os.walk(rootdir):
-#         for a_file in files:
-#             file_name = os.path.join(root, a_file)
-#             file_list.append(file_name)
-#     return file_list
 
 
 ##############################################################
 
-# Use """ find extracted -name "*.csv"| python parse_csv.py name_to_save_under """ to run from command line
+# Use """ find folder_to_seatch -name "*.csv"| python parse_csv.py """ to run from command line
 
 #initial RMS calculation
 # Average absolute.deviation, and PSD at 1, 3, 6, and 10hz for each axis over one hour (or length of file if shorter than one hour) (eg x_abs, x_1hz, x_3hz, x_6hz, x_10hz)
@@ -53,6 +38,7 @@ def calculate_RMS():
 
             length = 0
 
+
             print a_file
             csv_file.next() #skip the header
             for line in csv_file:
@@ -76,6 +62,7 @@ def calculate_RMS():
                 z_6hz += float(line[24])
                 z_10hz += float(line[25])
 
+        
         if length > 600:
             x_abs_avg = (x_abs/length)
             x_1hz_avg = (x_1hz/length)
@@ -95,9 +82,6 @@ def calculate_RMS():
             z_6hz_avg = (z_6hz/length)
             z_10hz_avg = (z_10hz/length)
 
-            # print "xavg: ",x_abs_avg, x_1hz_avg, x_3hz_avg, x_6hz_avg, x_10hz_avg
-            # print "yavg: ",y_abs_avg, y_1hz_avg, y_3hz_avg, y_6hz_avg, y_10hz_avg
-            # print "zavg: ",z_abs_avg, z_1hz_avg, z_3hz_avg, z_6hz_avg, z_10hz_avg
 
         # Calculate RMS for 5 dimensions
             total_abs_avg = array([x_abs_avg, y_abs_avg, z_abs_avg])
