@@ -1,2 +1,4 @@
 env/
-csv_files/
+csv_files/]*.pyc
+.*.swp
+*.db

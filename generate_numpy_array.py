@@ -28,55 +28,49 @@ def generate_numpy_array():
 	master_data_array = preprocessing.scale(master_data_array_unscaled)
 	print len(master_data_array)
 
-	X_train, X_test, y_train, y_test = cross_validation.train_test_split(master_data_array, master_labels_array, test_size=0.5, random_state=42)
-	print len(master_data_array)
-	print X_train.shape, y_train.shape
-	print X_test.shape, y_test.shape
-
-
 	X_train, X_test, y_train, y_test = train_test_split(master_data_array, master_labels_array, test_size=0.5, random_state=42)
 
-	# clf = svm.SVC(kernel='rbf', C=1)
-	# scores = cross_validation.cross_val_score(clf, master_data_array, master_labels_array, cv=5)
-	# print scores
-	# print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
+	clf = svm.SVC(kernel='rbf', C=100)
+	scores = cross_validation.cross_val_score(clf, master_data_array, master_labels_array, cv=5)
+	print scores
+	print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
 
 
 
 	# Set the parameters by cross-validation
 
 
-	tuned_parameters = [{'kernel': ['rbf'], 'gamma': [1e-3, 1e-4, 1e-2],
-	                     'C': [100]}]
+	# tuned_parameters = [{'kernel': ['rbf'], 'gamma': [1e-3, 1e-4, 1e-2],
+	#                      'C': [100]}]
 
-	scores = ['precision', 'recall']
+	# scores = ['precision', 'recall']
 
-	for score in scores:
-	    print("# Tuning hyper-parameters for %s" % score)
-	    print()
+	# for score in scores:
+	#     print("# Tuning hyper-parameters for %s" % score)
+	#     print()
 
-	    clf = GridSearchCV(SVC(C=1), tuned_parameters, cv=5, scoring=score)
-	    clf.fit(X_train, y_train)
+	#     clf = GridSearchCV(SVC(C=1), tuned_parameters, cv=5, scoring=score)
+	#     clf.fit(X_train, y_train)
 
-	    print("Best parameters set found on development set:")
-	    print()
-	    print(clf.best_estimator_)
-	    print()
-	    print("Grid scores on development set:")
-	    print()
-	    for params, mean_score, scores in clf.grid_scores_:
-	        print("%0.3f (+/-%0.03f) for %r"
-	              % (mean_score, scores.std() / 2, params))
-	    print()
+	#     print("Best parameters set found on development set:")
+	#     print()
+	#     print(clf.best_estimator_)
+	#     print()
+	#     print("Grid scores on development set:")
+	#     print()
+	#     for params, mean_score, scores in clf.grid_scores_:
+	#         print("%0.3f (+/-%0.03f) for %r"
+	#               % (mean_score, scores.std() / 2, params))
+	#     print()
 
-	    print("Detailed classification report:")
-	    print()
-	    print("The model is trained on the full development set.")
-	    print("The scores are computed on the full evaluation set.")
-	    print()
-	    y_true, y_pred = y_train, clf.predict(X_train)
-	    print(classification_report(y_true, y_pred))
-	    print()
+	#     print("Detailed classification report:")
+	#     print()
+	#     print("The model is trained on the full development set.")
+	#     print("The scores are computed on the full evaluation set.")
+	#     print()
+	#     y_true, y_pred = y_train, clf.predict(X_train)
+	#     print(classification_report(y_true, y_pred))
+	#     print()
 
 
 
