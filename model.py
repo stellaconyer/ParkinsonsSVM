@@ -49,6 +49,32 @@ class Post(Base):
     user = relationship("User")
 
 
+class Questions(Base):
+    __tablename__ = "questions"
+
+    question_id = Column(Integer, primary_key=True)
+    question = Column(String(500), nullable=False)
+
+class Question_choices(Base):
+    choice_id = Column(Integer, primary_key=True)
+    question_id = Column(Integer, ForeignKey("questions.id"))
+    is_correct_choice = 
+
+    questions = relationship("Questions")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def create_tables():
     Base.metadata.create_all(engine)
     u = User(email="test@test.com")

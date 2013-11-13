@@ -64,7 +64,7 @@ def calculate_RMS():
 
             if length > 600:
 
-            # Calculate RMS for 5 dimensions
+            # Calculate average for 5 dimensions
                 total_abs_avg = rms_abs/length
                 # print "rms abs", total_abs_avg
 

@@ -1,0 +1,50 @@
+CREATE TABLE Questions (
+	question_id serial PRIMARY KEY,
+	question varchar(500) NOT NULL);
+
+
+CREATE TABLE Question_choices (
+	choice_id serial PRIMARY KEY,
+	question_id int,
+	is_correct_choice smallint,
+	choice varchar(1000)); 
+
+CREATE TABLE User_question_answer (
+	user_id smallint,
+	question_id smallint,
+	choice_id smallint,
+	is_right smallint,
+	answer_time timestamp);
+
+
+ * User
+   - user_id    auto integer
+   - regtime    datetime
+   - username   varchar
+   - useremail  varchar
+   - userpass   varchar
+ * Question
+   - question_id   auto integer
+   - question      varchar
+   - is_active     enum(0,1)
+ * Question_choices
+   - choice_id        auto integer
+   - question_id      integer
+   - is_right_choice  enum(0,1)
+   - choice           varchar 
+ * User_question_answer
+   - user_id      integer
+   - question_id  integer
+   - choice_id    integer
+   - is_right     enum(0,1)
+   - answer_time  datetime)
+
+INSERT INTO Questions (question)
+VALUES
+	('What is the month following the sixth month in a year?');
+
+INSERT INTO Question_choices(question_id, is_correct_choice, choice)
+VALUES
+	(1, 0, 'June'),
+	(1, 1, 'July'),
+	(1, 0, 'August');

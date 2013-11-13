@@ -54,6 +54,16 @@ def create_post():
 
     return redirect(url_for("view_post", id=post.id))
 
+@app.route("/patient_login")
+def login():
+    return render_template("login.html")
+
+
+@app.route("/physician_login")
+def login():
+    return render_template("physician_login.html")
+
+
 @app.route("/login")
 def login():
     return render_template("login.html")
@@ -76,6 +86,13 @@ def authenticate():
 
     login_user(user)
     return redirect(request.args.get("next", url_for("index")))
+
+@app.route("/game")
+def start_game():
+    
+    
+
+
 
 
 if __name__ == "__main__":

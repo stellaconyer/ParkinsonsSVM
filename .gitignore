@@ -1,5 +1,7 @@
 env/
-csv_files/]*.pyc
+csv_files/
+*.pyc
 .*.swp
 *.db
 random_files/
+config.py
