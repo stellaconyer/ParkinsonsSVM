@@ -56,23 +56,24 @@ class Questions(Base):
     question = Column(String(500), nullable=False)
 
 class Question_choices(Base):
+    __tablename__ = "question_choices"
     choice_id = Column(Integer, primary_key=True)
     question_id = Column(Integer, ForeignKey("questions.id"))
-    is_correct_choice = 
+    is_correct_choice = Column(Integer)
+    choice = Column(String(1000))
 
     questions = relationship("Questions")
 
+class User_question_answer(Base):
+    __tablename__ = "User_question_answer"
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    question_id = Column(Integer, ForeignKey("questions.id"))
+    choice_id = Column(Integer)
+    is_right = Column(Integer)
+    answer_time = Column(DateTime, default=datetime.now)
 
-
-
-
-
-
-
-
-
-
-
+    questions = relationship("Questions")
 
 
 def create_tables():

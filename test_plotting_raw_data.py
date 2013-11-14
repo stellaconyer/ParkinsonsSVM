@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 #SCALE IF NOT AUTO SCALING
-SCALE = 5000
+SCALE = 40
 
 #PSD VALUES
 ABS = 0
@@ -19,13 +19,13 @@ def plot_numpy_array():
 	y_axis = HIGH
 
 	# X AXIS
-	control_data_array_x = np.genfromtxt('/Users/StellaCotton/Downloads/PATIENT_DATA.csv', usecols= (x_axis), delimiter=',')
+	control_data_array_x = np.genfromtxt('Michelle_format/PATIENT_DATA.csv', usecols= (x_axis), delimiter=',')
 	# parkinsons_data_array_x = np.genfromtxt('/Users/StellaCotton/Downloads/MJFF-Data/extracted/parkinsons_raw_data_10min.csv', usecols= (x_axis), delimiter=',')
 
 	# print len(parkinsons_data_array_x)
 
 	#Y AXIS
-	control_data_array_y = np.genfromtxt('/Users/StellaCotton/Downloads/PATIENT_DATA.csv', usecols= (y_axis), delimiter=',')
+	control_data_array_y = np.genfromtxt('Michelle_format/PATIENT_DATA.csv', usecols= (y_axis), delimiter=',')
 	# parkinsons_data_array_y = np.genfromtxt('/Users/StellaCotton/Downloads/MJFF-Data/extracted/parkinsons_raw_data_10min.csv', usecols= (y_axis), delimiter=',')
 
 	# Master of control and parkinsons:
@@ -38,8 +38,8 @@ def plot_numpy_array():
 	plt.plot(control_data_array_x, control_data_array_y, 'bo')
 
 	# plt.plot(parkinsons_data_array_x, parkinsons_data_array_y, 'ro')
-	# plt.axis([0, SCALE, 0, SCALE])
-	plt.autoscale(enable=True)
+	plt.axis([0, SCALE, 0, SCALE])
+	# plt.autoscale(enable=True)
 	plt.show()
 
 

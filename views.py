@@ -89,7 +89,7 @@ def authenticate():
 
 @app.route("/game")
 def start_game():
-    
+    return render_template("game.html")
     
 
 

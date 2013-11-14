@@ -69,3 +69,7 @@ def calculate_avg():
 
 calculate_avg()
 
+# python /Users/StellaCotton/hackbright/ParkinsonsSVM/parse_csv_per_user.py
+
+
+# find parkinsons -name "*.csv" | python /Users/StellaCotton/hackbright/ParkinsonsSVM/parse_csv_per_user.py

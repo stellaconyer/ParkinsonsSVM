@@ -4,6 +4,7 @@ import tarfile
 from datetime import datetime
 from numpy import mean, sqrt, arange, array
 import csv
+import math
 
 
 ##############################################################
@@ -38,11 +39,11 @@ def calculate_avg():
                 recorded_date = datetime.strptime(file_name[3], "%Y%m%d")
                 recorded_start_and_stop_time = file_name[4]
             
-                avg_abs = 0
-                avg_1hz = 0
-                avg_3hz = 0
-                avg_6hz = 0
-                avg_10hz = 0
+                avg_abs = []
+                avg_1hz = []
+                avg_3hz = []
+                avg_6hz = []
+                avg_10hz = []
                 length = 0
 
                 csv_file.next() #skip the header
@@ -50,37 +51,37 @@ def calculate_avg():
                     length +=1
                     line = line.split(",")
 
-                    line_abs_avg = array([float(line[3]), float(line[11]), float(line[19])])
-                    avg_abs += sum(line_abs_avg)/3
+                    line_abs_avg = [float(line[3]), float(line[11]), float(line[19])]
+                    avg_abs.append(math.fsum(line_abs_avg)/3.0)
 
-                    line_1hz_avg = array([float(line[6]), float(line[14]), float(line[22])])
-                    avg_1hz += sum(line_1hz_avg)/3
+                    line_1hz_avg = [float(line[6]), float(line[14]), float(line[22])]
+                    avg_1hz.append(math.fsum(line_1hz_avg)/3.0)
                     
-                    line_3hz_avg = array([float(line[7]), float(line[15]), float(line[23])])
-                    avg_3hz += sum(line_3hz_avg)/3
+                    line_3hz_avg = [float(line[7]), float(line[15]), float(line[23])]
+                    avg_3hz.append(math.fsum(line_3hz_avg)/3.0)
 
-                    line_6hz_avg = array([float(line[8]), float(line[16]), float(line[24])])
-                    avg_6hz += sum(line_6hz_avg)/3
+                    line_6hz_avg = [float(line[8]), float(line[16]), float(line[24])]
+                    avg_6hz.append(math.fsum(line_6hz_avg)/3.0)
 
-                    line_10hz_avg = array([float(line[9]), float(line[17]), float(line[25])])
-                    avg_10hz += sum(line_10hz_avg)/3
+                    line_10hz_avg = [float(line[9]), float(line[17]), float(line[25])]
+                    avg_10hz.append(math.fsum(line_10hz_avg)/3.0)
 
                 if length > 600:
 
                 # Calculate average for 5 dimensions
-                    total_abs_avg = avg_abs/length
+                    total_abs_avg = math.fsum(avg_abs)/length * 1.0
                     # print "rms abs", total_abs_avg
 
-                    total_1hz_avg = avg_1hz/length
+                    total_1hz_avg = math.fsum(avg_1hz)/length * 1.0
                     # print "rms 1hz", total_1hz_avg
 
-                    total_3hz_avg = avg_3hz/length
+                    total_3hz_avg = math.fsum(avg_3hz)/length * 1.0
                     # print "rms 3hz", total_3hz_avg
 
-                    total_6hz_avg = avg_6hz/length
+                    total_6hz_avg = math.fsum(avg_6hz)/length * 1.0
                     # print "rms 6hz",total_6hz_avg
 
-                    total_10hz_avg = avg_10hz/length
+                    total_10hz_avg = math.fsum(avg_10hz)/length * 1.0
                     # print "rms 10hz",total_10hz_avg
 
 
