@@ -15,17 +15,17 @@ HIGH = 4
 
 def plot_numpy_array():
 
-	x_axis =  HIGHMID
-	y_axis = HIGH
+	x_axis =  2
+	y_axis = 6
 
 	# X AXIS
-	control_data_array_x = np.genfromtxt('Michelle_format/PATIENT_DATA.csv', usecols= (x_axis), delimiter=',')
+	control_data_array_x = np.genfromtxt('PATIENT_DATA_CHRISTIAN_2.csv', usecols= (x_axis), delimiter=',')
 	# parkinsons_data_array_x = np.genfromtxt('/Users/StellaCotton/Downloads/MJFF-Data/extracted/parkinsons_raw_data_10min.csv', usecols= (x_axis), delimiter=',')
 
 	# print len(parkinsons_data_array_x)
 
 	#Y AXIS
-	control_data_array_y = np.genfromtxt('Michelle_format/PATIENT_DATA.csv', usecols= (y_axis), delimiter=',')
+	control_data_array_y = np.genfromtxt('PATIENT_DATA_CHRISTIAN_2.csv', usecols= (y_axis), delimiter=',')
 	# parkinsons_data_array_y = np.genfromtxt('/Users/StellaCotton/Downloads/MJFF-Data/extracted/parkinsons_raw_data_10min.csv', usecols= (y_axis), delimiter=',')
 
 	# Master of control and parkinsons:
@@ -38,8 +38,8 @@ def plot_numpy_array():
 	plt.plot(control_data_array_x, control_data_array_y, 'bo')
 
 	# plt.plot(parkinsons_data_array_x, parkinsons_data_array_y, 'ro')
-	plt.axis([0, SCALE, 0, SCALE])
-	# plt.autoscale(enable=True)
+	# plt.axis([0, SCALE, 0, SCALE])
+	plt.autoscale(enable=True)
 	plt.show()
 
 

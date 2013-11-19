@@ -19,23 +19,12 @@ import csv
 
 def calculate_avg():
 
-    group = int(sys.argv[1])
+        with open('one_line_test/test_data_one_line.csv','r') as csv_file:
+            data_set = 1
+            group = 1
+            patient = "cherry"
 
-    if group == 1:
-        data_set = "parkinsons"
-    elif group == 0:
-        data_set = "control"
-    print data_set
-
-    for line in sys.stdin: 
-        a_file = line.strip()
-
-        with open(a_file,'r') as csv_file:
-            path_name = a_file.split("/")
-            file_name = path_name[3].replace(".", "_").split("_")
-            patient = file_name[2]
-
-            csv_file.next() #skip the headeR
+            csv_file.next() #skip the heade
 
             for line in csv_file:
 
@@ -59,7 +48,7 @@ def calculate_avg():
                 time = line[26].strip().replace("\"", '')
 
                 #Append to master file for control or parkinsons dataset
-                filename = "%s_test_total.csv" % data_set  
+                filename = "one_line_test/PATIENT_DATA_STELLA.csv"
                 with open(filename, 'ab') as csvfile:
                     linewriter = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
                     linewriter.writerow([patient, group, total_abs, x_1hz, x_3hz, x_6hz, x_10hz, y_1hz, y_3hz, y_6hz, y_10hz, z_1hz, z_3hz, z_6hz, z_10hz, time])

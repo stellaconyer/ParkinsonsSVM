@@ -19,13 +19,13 @@ def plot_numpy_array():
 	y_axis = HIGH
 
 	# X AXIS
-	control_data_array_x = np.genfromtxt('/Users/StellaCotton/Downloads/MJFF-Data/extracted/parkinsons_master_hourly.csv', usecols= (x_axis), delimiter=',')
+	control_data_array_x = np.genfromtxt('/Users/StellaCotton/Downloads/MJFF-Data/extracted/parkinsons_master_hourly_stella.csv', usecols= (x_axis), delimiter=',')
 	# parkinsons_data_array_x = np.genfromtxt('/Users/StellaCotton/Downloads/MJFF-Data/extracted/parkinsons_raw_data_10min.csv', usecols= (x_axis), delimiter=',')
 
 	# print len(parkinsons_data_array_x)
 
 	#Y AXIS
-	control_data_array_y = np.genfromtxt('/Users/StellaCotton/Downloads/MJFF-Data/extracted/parkinsons_master_hourly.csv', usecols= (y_axis), delimiter=',')
+	control_data_array_y = np.genfromtxt('/Users/StellaCotton/Downloads/MJFF-Data/extracted/parkinsons_master_hourly_stella.csv', usecols= (y_axis), delimiter=',')
 	# parkinsons_data_array_y = np.genfromtxt('/Users/StellaCotton/Downloads/MJFF-Data/extracted/parkinsons_raw_data_10min.csv', usecols= (y_axis), delimiter=',')
 
 	# Master of control and parkinsons:

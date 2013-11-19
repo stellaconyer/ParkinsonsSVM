@@ -7,3 +7,6 @@ random_files/
 config.py
 Michelle_format/
 test_file/
+heroku*
+features.py
+one_line_test/
