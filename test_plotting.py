@@ -2,30 +2,37 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 #SCALE IF NOT AUTO SCALING
-SCALE = 40
+SCALE = 8
+
+#patient, group, total_abs, total_1hz, total_3hz, total_6hz, total_10hz, time
 
 #PSD VALUES
-ABS = 0
-LOW = 1
-MID = 2
-HIGHMID = 3
-HIGH = 4
+ABS = 2
+LOW = 3
+MID = 4
+HIGHMID = 5
+HIGH = 6
+
+
+
+park_file = "/Users/StellaCotton/Downloads/MJFF-Data/extracted/parkinsons_total_values.csv"
+control_file = "/Users/StellaCotton/Downloads/MJFF-Data/extracted/control_total_values.csv"
 
 
 def plot_numpy_array():
 
-	x_axis =  HIGHMID
-	y_axis = HIGH
+	x_axis = MID
+	y_axis = HIGHMID
 
 	# X AXIS
-	control_data_array_x = np.genfromtxt('control_master_hourly.csv', usecols= (x_axis), delimiter=',')
-	parkinsons_data_array_x = np.genfromtxt('parkinsons_master_hourly.csv', usecols= (x_axis), delimiter=',')
+	control_data_array_x = np.genfromtxt(control_file, usecols= (x_axis), delimiter=',')
+	# parkinsons_data_array_x = np.genfromtxt(park_file, usecols= (x_axis), delimiter=',')
 
 	# print len(parkinsons_data_array_x)
 
 	#Y AXIS
-	control_data_array_y = np.genfromtxt('control_master_hourly.csv', usecols= (y_axis), delimiter=',')
-	parkinsons_data_array_y = np.genfromtxt('parkinsons_master_hourly.csv', usecols= (y_axis), delimiter=',')
+	control_data_array_y = np.genfromtxt(control_file, usecols= (y_axis), delimiter=',')
+	# parkinsons_data_array_y = np.genfromtxt(park_file, usecols= (y_axis), delimiter=',')
 
 	# Master of control and parkinsons:
 	# master_data_array_unscaled = np.concatenate([control_data_array, parkinsons_data_array])
@@ -36,7 +43,7 @@ def plot_numpy_array():
 
 	plt.plot(control_data_array_x, control_data_array_y, 'bo')
 
-	plt.plot(parkinsons_data_array_x, parkinsons_data_array_y, 'ro')
+	# plt.plot(parkinsons_data_array_x, parkinsons_data_array_y, 'ro')
 	plt.axis([0, SCALE, 0, SCALE])
 	# plt.autoscale(enable=True)
 	plt.show()
