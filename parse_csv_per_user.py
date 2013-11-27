@@ -43,10 +43,10 @@ def calculate_avg():
 
                 line = line.split(",")
                 total_abs = (float(line[3]) + float(line[11]) + float(line[19]))/3
-                total_1hz = line[6] + line[14] + line[22]
-                total_3hz = line[7] + line[15] + line[23]
-                total_6hz = line[8] + line[16] + line[24]
-                total_10hz = line[9] + line[17] + line[25]
+                total_1hz = float(line[6]) + float(line[14]) + float(line[22])
+                total_3hz = float(line[7]) + float(line[15]) + float(line[23])
+                total_6hz = float(line[8]) + float(line[16]) + float(line[24])
+                total_10hz = float(line[9]) + float(line[17]) + float(line[25])
 
 
                 time = line[26].strip().replace("\"", '')
