@@ -43,20 +43,27 @@ def calculate_avg():
 
                 line = line.split(",")
                 total_abs = (float(line[3]) + float(line[11]) + float(line[19]))/3
-                total_1hz = float(line[6]) + float(line[14]) + float(line[22])
-                total_3hz = float(line[7]) + float(line[15]) + float(line[23])
-                total_6hz = float(line[8]) + float(line[16]) + float(line[24])
-                total_10hz = float(line[9]) + float(line[17]) + float(line[25])
+                x_1hz = line[6]
+                x_3hz = line[7]
+                x_6hz = line[8]
+                x_10hz = line[9]
 
+                y_1hz = line[14]
+                y_3hz = line[15]
+                y_6hz = line[16]
+                y_10hz = line[17]
 
+                z_1hz = line[22]
+                z_3hz = line[23]
+                z_6hz = line[24]
+                z_10hz = line[25]
                 time = line[26].strip().replace("\"", '')
 
             #     #Append to master file for control or parkinsons dataset
-                filename = "%s_total_values.csv" % data_set  
+                filename = "/Users/StellaCotton/hackbright/ParkinsonsSVM/random_files/Michelle_format/data/%s_test_total.csv" % data_set  
                 with open(filename, 'ab') as csvfile:
                     linewriter = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_MINIMAL)
-                    linewriter.writerow([patient, group, total_abs, total_1hz, total_3hz, total_6hz, total_10hz, time])
-
+                    linewriter.writerow([patient, group, total_abs, x_1hz, x_3hz, x_6hz, x_10hz, y_1hz, y_3hz, y_6hz, y_10hz, z_1hz, z_3hz, z_6hz, z_10hz, time])
 
 
 

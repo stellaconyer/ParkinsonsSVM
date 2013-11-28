@@ -19,8 +19,9 @@ HIGH = 4
 LABEL = 5
 
 
-park_file = "/Users/StellaCotton/Downloads/MJFF-Data/extracted/parkinsons_master_hourly_stella.csv"
-control_file = "/Users/StellaCotton/Downloads/MJFF-Data/extracted/parkinsons_master_hourly_stella.csv"
+park_file = "/Users/StellaCotton/hackbright/ParkinsonsSVM/random_files/PARK_PATIENT_DATA_CHRISTIAN_3.csv"
+control_file = "/Users/StellaCotton/hackbright/ParkinsonsSVM/random_files/CONTROL_PATIENT_DATA_CHRISTIAN_3.csv"
+
 
 
 

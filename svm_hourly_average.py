@@ -9,14 +9,25 @@ from sklearn.svm import SVC
 import matplotlib.pyplot as plt
 
 
+LABEL = 0
+ABS = 2
+LOW = 3
+MID = 4
+HIGHMID = 5
+HIGH = 6
+
+
+park_file = "/Users/StellaCotton/hackbright/ParkinsonsSVM/random_files/PARK_PATIENT_DATA_CHRISTIAN_3.csv"
+control_file = "/Users/StellaCotton/hackbright/ParkinsonsSVM/random_files/CONTROL_PATIENT_DATA_CHRISTIAN_3.csv"
+
 def generate_numpy_array():
 	# Control:
-	control_data_array = np.genfromtxt('old_datasets/avg_then_rms_dataset/control_master_hourly.csv', usecols= (0,1,2,3,4), delimiter=',')
-	control_labels_array = np.genfromtxt('old_datasets/avg_then_rms_dataset/control_master_hourly.csv', usecols= (5), delimiter=',')
+	control_data_array = np.genfromtxt(control_file, usecols= (ABS, LOW, MID, HIGHMID, HIGH), delimiter=',')
+	control_labels_array = np.genfromtxt(control_file, usecols= (LABEL), delimiter=',')
 
 	# Parkinsons:
-	parkinsons_data_array = np.genfromtxt('old_datasets/avg_then_rms_dataset/parkinsons_master_hourly.csv', usecols= (0,1,2,3,4), delimiter=',')
-	parkinsons_labels_array = np.genfromtxt('old_datasets/avg_then_rms_dataset/parkinsons_master_hourly.csv', usecols= (5), delimiter=',')
+	parkinsons_data_array = np.genfromtxt(park_file, usecols= (ABS, LOW, MID, HIGHMID, HIGH), delimiter=',')
+	parkinsons_labels_array = np.genfromtxt(park_file, usecols= (LABEL), delimiter=',')
 
 	# Master of control and parkinsons:
 	master_data_array_unscaled = np.concatenate([control_data_array, parkinsons_data_array])
@@ -27,10 +38,13 @@ def generate_numpy_array():
 
 	master_data_array = preprocessing.scale(master_data_array_unscaled)
 	print len(master_data_array)
+	print len(master_labels_array)
 
-	X_train, X_test, y_train, y_test = train_test_split(master_data_array, master_labels_array, test_size=0.5, random_state=42)
+	# X_train, X_test, y_train, y_test = train_test_split(master_data_array, master_labels_array, test_size=0.5, random_state=42)
+
 
 	clf = svm.SVC(kernel='rbf', C=100)
+
 	scores = cross_validation.cross_val_score(clf, master_data_array, master_labels_array, cv=5)
 	print scores
 	print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
