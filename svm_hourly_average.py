@@ -38,13 +38,12 @@ def generate_numpy_array():
 
 	master_data_array = preprocessing.scale(master_data_array_unscaled)
 	print len(master_data_array)
-	print len(master_labels_array)
 
 	# X_train, X_test, y_train, y_test = train_test_split(master_data_array, master_labels_array, test_size=0.5, random_state=42)
 
 
 	clf = svm.SVC(kernel='rbf', C=100)
-
+	
 	scores = cross_validation.cross_val_score(clf, master_data_array, master_labels_array, cv=5)
 	print scores
 	print("Accuracy: %0.2f (+/- %0.2f)" % (scores.mean(), scores.std() * 2))
