@@ -50,40 +50,40 @@ def generate_numpy_array():
 
 
 
-	# Set the parameters by cross-validation
+	Set the parameters by cross-validation
 
 
-	# tuned_parameters = [{'kernel': ['rbf'], 'gamma': [1e-3, 1e-4, 1e-2],
-	#                      'C': [100]}]
+	tuned_parameters = [{'kernel': ['rbf'], 'gamma': [1e-3, 1e-4, 1e-2],
+	                     'C': [100]}]
 
-	# scores = ['precision', 'recall']
+	scores = ['precision', 'recall']
 
-	# for score in scores:
-	#     print("# Tuning hyper-parameters for %s" % score)
-	#     print()
+	for score in scores:
+	    print("# Tuning hyper-parameters for %s" % score)
+	    print()
 
-	#     clf = GridSearchCV(SVC(C=1), tuned_parameters, cv=5, scoring=score)
-	#     clf.fit(X_train, y_train)
+	    clf = GridSearchCV(SVC(C=1), tuned_parameters, cv=5, scoring=score)
+	    clf.fit(X_train, y_train)
 
-	#     print("Best parameters set found on development set:")
-	#     print()
-	#     print(clf.best_estimator_)
-	#     print()
-	#     print("Grid scores on development set:")
-	#     print()
-	#     for params, mean_score, scores in clf.grid_scores_:
-	#         print("%0.3f (+/-%0.03f) for %r"
-	#               % (mean_score, scores.std() / 2, params))
-	#     print()
+	    print("Best parameters set found on development set:")
+	    print()
+	    print(clf.best_estimator_)
+	    print()
+	    print("Grid scores on development set:")
+	    print()
+	    for params, mean_score, scores in clf.grid_scores_:
+	        print("%0.3f (+/-%0.03f) for %r"
+	              % (mean_score, scores.std() / 2, params))
+	    print()
 
-	#     print("Detailed classification report:")
-	#     print()
-	#     print("The model is trained on the full development set.")
-	#     print("The scores are computed on the full evaluation set.")
-	#     print()
-	#     y_true, y_pred = y_train, clf.predict(X_train)
-	#     print(classification_report(y_true, y_pred))
-	#     print()
+	    print("Detailed classification report:")
+	    print()
+	    print("The model is trained on the full development set.")
+	    print("The scores are computed on the full evaluation set.")
+	    print()
+	    y_true, y_pred = y_train, clf.predict(X_train)
+	    print(classification_report(y_true, y_pred))
+	    print()
 
 
 

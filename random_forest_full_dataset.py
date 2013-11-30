@@ -2,6 +2,7 @@ import numpy as np
 from sklearn import preprocessing
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.cross_validation import train_test_split
+from sklearn.metrics import classification_report
 
 LABEL = 0
 ABS = 2
@@ -27,15 +28,16 @@ def generate_numpy_array():
 	master_data_array_unscaled = np.concatenate([control_data_array, parkinsons_data_array])
 	master_labels_array = np.concatenate([control_labels_array, parkinsons_labels_array]) 
 
-	master_data_array = preprocessing.scale(master_data_array_unscaled)
+	# master_data_array = preprocessing.scale(master_data_array_unscaled)
 
-	X_train, X_test, y_train, y_test = train_test_split(master_data_array, master_labels_array, test_size=0.2, random_state=42)
+	X_train, X_test, y_train, y_test = train_test_split(master_data_array_unscaled, master_labels_array, test_size=0.2, random_state=42)
 
 	clf = RandomForestClassifier(n_estimators=150, min_samples_split=2, n_jobs=-1).fit(X_train, y_train)
 	print clf.score(X_test, y_test)
 
-	test = [2.4728413708669374, 1.0213275879824053, 0.6079034848067788, 0.77700792781258421]
-	print clf.predict(test)
+	y_true, y_pred = y_test, clf.predict(X_test)
+	print(classification_report(y_true, y_pred))
+
 
 
 
